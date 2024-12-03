@@ -166,8 +166,11 @@ cython_debug/
 
 # data and keras model too big for github, stored in Google Drive
 data/ODIR-5K
+data/ODIR-5K.zip
 data/binary
 data/binary.zip
 data/multiclass
+data/multiclass.zip
 data/preprocessed_images
+data/preprocessed_images.zip
 code/final_model.keras
