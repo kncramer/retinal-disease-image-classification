@@ -21,32 +21,32 @@ There are several retinal diseases represented in this project:
 
 * ***Diabetes*** - While a systemic condition, it can affect the small blood vessel located in the retina. Severe cases that aren't caught early can require laser surgery to repair and leave permanent vision loss.
 
-<center><img src='./data/multiclass/diabetes/224_right.jpg' width = '300'></center>
+<center><img src='./images/224_right.jpg' width = '300'></center>
 <br>
 
 * ***Glaucoma*** - Characteristically increases pressure inside the eye that stresses the optic nerve. Vision loss from glaucoma starts in a patients' peripheral vision so they appear asymptomatic in the early stages. There are several treatment options to prevent the progression of glaucoma, but any damage caused to the optic nerve is irreversible.
 
-<center><img src='./data/multiclass/glaucoma/746_right.jpg' width = '300'></center>
+<center><img src='./images/746_right.jpg' width = '300'></center>
 <br>
 
 * ***Cataract*** - The lens inside the eye grows clowdy and opaque, usually with age, and the impact on vision is gradual. Can be treated with cataract surgery where the lens in taken out and replaced with a lens implant. Cataracts don't affect the retina directly, but they impede the view of the retina to detect other conditions.
 
-<center><img src='./data/multiclass/cataract/112_right.jpg' width = '300'></center>
+<center><img src='./images/112_right.jpg' width = '300'></center>
 <br>
 
 * ***Age Related Macular Degeneration (AMD)*** - There are two major types, dry and wet. They both affect the macula which directly affects our central vision. Neither kind is curable, but monitoring is key because if dry AMD turns to wet, vision loss can be sudden and severe.
 
-<center><img src='./data/multiclass/amd/213_right.jpg' width = '300'></center>
+<center><img src='./images/213_right.jpg' width = '300'></center>
 <br>
 
 * ***Hypertension*** - Another systemic condition that affects our blood vessels. Often asymptomatic until damage is severe, early detection from yearly screenings is crucial to prevent damage to the retina.
 
-<center><img src='./data/multiclass/hypertension/28_right.jpg' width = '300'></center>
+<center><img src='./images/28_right.jpg' width = '300'></center>
 <br>
 
 * ***Pathological Myopia*** - When a patient's vision is short sighted enough that the back of the eye experiences degenerative changes. While untreatable, these retinal changes mean the patient is at higher risk for events like retinal detachments and they may want more frequent retinal monitoring.
 
-<center><img src='./data/multiclass/myopia/401_right.jpg' width = '300'></center>
+<center><img src='./images/401_right.jpg' width = '300'></center>
 <br>
 
 The annual eye exam is the forefront way to screen for these conditions and many others. The historical method is for an optometrist or ophthalmologist to perform a dilated fundus exam where they dilate the pupil and physically look at the back of the eye. The increasingly preferred method is to take a photo of the retina with a fundus photography camera. They are not available in all practices, but if available they provide the doctor a more detailed look at the retina where they can focus and zoom on areas of interest and they can compare images year to year.
