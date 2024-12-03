@@ -10,3 +10,6 @@ Some challenges include:
 * Addressing class imbalance where some diseases are underrepresented.
 
 The goal is to create an additional tool to aid optometrists/ophthalmologists in improving diagnostic accuracy and prioritizing patient health through minimal false negatives.
+
+
+All image data and the final Keras model for this project is hosted on my [Google Drive](https://drive.google.com/drive/folders/1sbu1XlEluZJrbUmGFn5uPuOlhPmZ2QVV?usp=drive_link) in zip files for those that would like to run through the code themselves.
