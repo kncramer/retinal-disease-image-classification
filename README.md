@@ -24,7 +24,7 @@ There are several retinal diseases represented in this project:
 <center><img src='./images/224_right.jpg' width = '300'></center>
 <br>
 
-* ***Glaucoma*** - Characteristically increases pressure inside the eye that stresses the optic nerve. Vision loss from glaucoma starts in a patients' peripheral vision so they appear asymptomatic in the early stages. There are several treatment options to prevent the progression of glaucoma, but any damage caused to the optic nerve is irreversible.
+* ***Glaucoma*** - Characteristically increases pressure inside the eye that stresses the optic nerve. Vision loss from glaucoma starts in a patient's peripheral vision so they are often asymptomatic in the early stages. There are several treatment options to prevent the progression of glaucoma, but any damage caused to the optic nerve is irreversible.
 
 <center><img src='./images/746_right.jpg' width = '300'></center>
 <br>
@@ -82,15 +82,17 @@ All data for this project is from Kaggle's [Ocular Disease Recognition Dataset](
 
 I prepared the data for both a binary classification for health vs. non-healthy retinal images as well as multiclass classification for each individual disease label. Seen below, the distribution for the binary classes was fairly even compared to very imbalanced classes for the multiclass problem.
 
-<center><img src='./images/binary_class_distribution.png' width='500'></center>
-<center><img src='./images/multiclass_histogram.png' width='700'></center>
+<img src='./images/binary_class_distribution.png' width='500'>
+<img src='./images/multiclass_histogram.png' width='700'>
 <br>
 
 For most of the diseases, patients were split evenly on whether the condition affected both eyes or only one eye. The exceptions to this were AMD and hypertension where the majority of patients showed signs in both eyes. Those patients that have some other condition or abnormality that doesn't fall under the 6 listed conditions predominantly only have it in one eye.
 
-<center><img src='./images/conditions_between_eyes.png' width='800'></center>
+<img src='./images/conditions_between_eyes.png' width='800'>
 <br>
 
+### Image Augmentation
+To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye non-discriminantly so this gave the models more data for each eye.
 
 ---
 ## [Modeling](./code/02_modeling.ipynb)
