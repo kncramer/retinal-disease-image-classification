@@ -165,9 +165,9 @@ cython_debug/
 .virtual_documents/
 
 # data and keras model too big for github, stored in Google Drive
-.data/ODIR-5K
-.data/binary
-.data/binary.zip
-.data/multiclass
-.data/preprocessed_images
-.code/final_model.keras
+./data/ODIR-5K
+./data/binary
+./data/binary.zip
+./data/multiclass
+./data/preprocessed_images
+./code/final_model.keras
