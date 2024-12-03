@@ -92,12 +92,19 @@ For most of the diseases, patients were split evenly on whether the condition af
 <br>
 
 ### Image Augmentation
-To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye non-discriminantly so this gave the models more data for each eye.
+To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye non-discriminantly so this gave the models more data for each eye. In modeling I used two random augmentation methods, rotation to account for slight variations in orientation with images taken and contrast to try and highlight conditions that show up as dark or bright spots.
 
 ---
 ## [Modeling](./code/02_modeling.ipynb)
 
+The next step was to build a model to predict if an image is of a normal retina or a diseased retina. I trained all models using an A100 GPU server on Google Colab to increase training speed. I started with building a Convolutional Neural Network (CNN) from scratch using Keras. I tuned several iterations while trying to build one complex enough to learn from the dataset, however I was unable to get any model to perform above the baseline accuracy of 55% because it was predicting every image as the positive class (not healthy).
 
+At this point I switched to transfer learning using pretrained models ResNet152V2 and Xception with Keras. I tried ResNet152V2 first and after tuning it achieved a validation accuracy of 70.67% and a validation sensitivity of 70.97%. This was no where close to what I need for a production model so I then tried transfer learning with Xception. After tuning this model my final validation accuracy was 75.92% and validation sensitivity was 73.77%. Below you can see the training path for this Xception trained model showing loss, sensitivity and accuracy.
+
+<img src='./images/best_model_performance.png' width='900'>
+<br>
+
+This model doesn't reach my benchmark to make it production ready. I would need to tune at what level the pretrained level is trainable, and it starts overfitting as soon as it starts learning from the new data so I would need to introduce more regularization within the network.
 
 ---
 ## Insights and Next Steps
