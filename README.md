@@ -1,16 +1,16 @@
 # Retinal Disease Classification
 ---
 
-Retinal eye diseases, such as diabetic retinopathy, macular degeneration, and glaucoma are some of the leading causes of vision loss worldwide. Early and accurate detection of these conditions is critical to preventing irreversible damage and to initiate treatment. However, traditional diagnostic methods that rely on manual analysis by optometrists or ophthalmologists can be time-consuming, subjective, or inaccessible to underserved populations.
+Retinal eye diseases, such as diabetic retinopathy, macular degeneration, and glaucoma are some of the leading causes of vision loss worldwide. Early and accurate detection of these conditions is critical to preventing irreversible damage and initiating treatment. However, traditional diagnostic methods that rely on manual analysis by optometrists or ophthalmologists can be time-consuming, subjective, or inaccessible to underserved populations.
 
 This project aims to develop an image classification model to differentiate a healthy retina from a non-healthy retina. The primary focus is on maximizing sensitivity, as missing a diagnosis could lead to severe consequences for patients, including delayed treatment and potential vision loss. Achieving high sensitivity ensures that cases with potential disease are flagged for further review and additional diagnostic testing methods to minimize the risk of overlooked conditions.
 
 Some challenges include:
-* Variability in image quality, caused by different skills in the technician taking the photo, different quality machines, and interfering factors like dust on the imaging lens.
-* Differentiating between subtle differences between similar diseases.
+* Variability in image quality caused by differences in technician skills, machine quality, and interfering factors such as dust on the imaging lens.
+* Differentiating the subtle differences between similar diseases.
 * Addressing class imbalance where some diseases are underrepresented.
 
-The goal is to create an additional tool to aid optometrists/ophthalmologists in improving diagnostic accuracy and prioritizing patient health through minimal false negatives. To consider a model production ready I would want accuracy above 80% and sensitivity above 95%. 
+The goal is to create an additional tool to aid optometrists and ophthalmologists in improving diagnostic accuracy and prioritizing patient health through minimal false negatives. To consider a model production-ready, accuracy above 80% and sensitivity above 95% are required. 
 
 
 All image data and the final saved Keras model for this project are hosted on this [Google Drive](https://drive.google.com/drive/folders/1sbu1XlEluZJrbUmGFn5uPuOlhPmZ2QVV?usp=drive_link) in zip files for those that would like to run through the code themselves.
@@ -29,12 +29,12 @@ There are several retinal diseases represented in this project:
 <center><img src='./images/746_right.jpg' width = '300'></center>
 <br>
 
-* ***Cataract*** - The lens inside the eye grows cloudy and opaque, usually with age, and the impact on vision is gradual. Can be treated with cataract surgery where the lens in taken out and replaced with a lens implant. Cataracts don't affect the retina directly, but they impede the view of the retina to detect other conditions.
+* ***Cataract*** - The lens inside the eye grows cloudy and opaque, usually with age, and the impact on vision is gradual. It can be treated with cataract surgery, where the lens is removed and replaced with a lens implant. Cataracts don't affect the retina directly, but they impede the view of the retina to detect other conditions.
 
 <center><img src='./images/112_right.jpg' width = '300'></center>
 <br>
 
-* ***Age Related Macular Degeneration (AMD)*** - There are two major types, dry and wet. They both affect the macula which directly affects our central vision. Neither kind is curable, but monitoring is key because if dry AMD turns to wet, vision loss can be sudden and severe.
+* ***Age Related Macular Degeneration (AMD)*** - There are two major types, dry and wet. Both affect the macula, directly impacting our central vision. Neither type is curable, but monitoring is key because if dry AMD turns to wet, vision loss can be sudden and severe.
 
 <center><img src='./images/213_right.jpg' width = '300'></center>
 <br>
@@ -92,14 +92,14 @@ For most of the diseases, patients were split evenly on whether the condition af
 <br>
 
 ### Image Augmentation
-To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye indiscriminately so this gave the models more data for each eye. In modeling I used two random augmentation methods, rotation to account for slight variations in orientation with images taken and contrast to try and highlight conditions that show up as dark or bright spots.
+To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for, so I decided not to use these photos for model training. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye indiscriminately so this gave the models more data for each eye. For modeling, I used two random augmentation methods: rotation to account for slight variations in image orientation and contrast adjustments to highlight conditions that appear as dark or bright spots.
 
 ---
 ## [Modeling](./code/02_modeling.ipynb)
 
-The next step was to build a model to predict if an image is of a normal retina or a diseased retina. I trained all models using an A100 GPU server on Google Colab to increase training speed. I started with building a Convolutional Neural Network (CNN) from scratch using Keras. I tuned several iterations while trying to build one complex enough to learn from the dataset, however I was unable to get any model to perform above the baseline accuracy of 55% because it was predicting every image as the positive class (not healthy).
+The next step was to build a model to predict if an image is of a normal retina or a diseased retina. I trained all models using an A100 GPU server on Google Colab to increase training speed. I started with building a Convolutional Neural Network (CNN) from scratch using Keras. I tuned several iterations while trying to build a model complex enough to learn from the dataset; however, none performed above the baseline accuracy of 55% due to predicting every image as the positive class (not healthy).
 
-At this point I switched to transfer learning using pretrained models ResNet152V2 and Xception with Keras. I tried ResNet152V2 first and after tuning it achieved a validation accuracy of 70.67% and a validation sensitivity of 70.97%. This was no where close to what I need for a production model so I then tried transfer learning with Xception. After tuning this model my final validation accuracy was 75.92% and validation sensitivity was 73.77%. Below you can see the training path for this Xception trained model showing loss, sensitivity and accuracy.
+At this point I switched to transfer learning using pretrained models ResNet152V2 and Xception with Keras. I tried ResNet152V2 first and after tuning it achieved a validation accuracy of 70.67% and a validation sensitivity of 70.97%. This was nowhere close to the requirements for a production model, so I then tried transfer learning with Xception. After tuning this model my final validation accuracy was 75.92% and validation sensitivity was 73.77%. Below you can see the training path for this Xception trained model showing loss, sensitivity and accuracy.
 
 <img src='./images/best_model_performance.png' width='900'>
 <br>
@@ -109,12 +109,12 @@ This model doesn't reach my benchmark to make it production ready. I would need 
 ---
 ## Insights and Next Steps
 
-The final tuned Xception model achieved a validation accuracy of 75.92% and a test accuracy of 74.77%. However, these metrics fall short of the production-ready threshold of 90% accuracy. While the model demonstrates some discriminatory power by improving over the baseline accuracy of 55%, the test set sensitivity of 74.02% is concerning, as the production-ready threshold of 95% sensitivity is critical for minimizing false negatives in retinal disease detection.
+The final tuned Xception model achieved a validation accuracy of 75.92% and a test accuracy of 74.77%. However, these metrics fall short of the production-ready threshold of 80% accuracy. While the model demonstrates some discriminatory power by improving over the baseline accuracy of 55%, the test set sensitivity of 74.02% is concerning, as the production-ready threshold of 95% sensitivity is critical for minimizing false negatives in retinal disease detection.
 
 Some possible next steps:
 * Utilize additional data augmentation techniques.
 * Experiment with other pretrained architectures, I only looked at two in this project.
-* Start fine tuning layers deeper in Xception to adapt to the the specific dataset better, and try other regularization techniques with this to prevent overfitting.
+* Start fine-tuning deeper layers in Xception to better adapt to the the specific dataset, and explore additional regularization techniques to prevent overfitting.
 * Tune hyperparameters such as learning rate and optimizers to help mitigate overfitting.
 * Explore other preprocessing techniques to highlight regions specific to fundus images.
 * Try combining multiple pretrained models.
