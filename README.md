@@ -104,8 +104,19 @@ At this point I switched to transfer learning using pretrained models ResNet152V
 <img src='./images/best_model_performance.png' width='900'>
 <br>
 
-This model doesn't reach my benchmark to make it production ready. I would need to tune at what level the pretrained level is trainable, and it starts overfitting as soon as it starts learning from the new data so I would need to introduce more regularization within the network.
+This model doesn't reach my benchmark to make it production ready. I would need to tune at what level the pretrained level is trainable, and it starts overfitting as soon as it starts learning from the new data so I would need to introduce more regularization within the network. With the model for binary classification not reaching the level I needed for production I didn't pursue the multiclass problem. 
 
 ---
 ## Insights and Next Steps
 
+The final tuned Xception model achieved a validation accuracy of 75.92% and a test accuracy of 74.77%. However, these metrics fall short of the production-ready threshold of 90% accuracy. While the model demonstrates some discriminatory power by improving over the baseline accuracy of 55%, the test set sensitivity of 74.02% is concerning, as the production-ready threshold of 95% sensitivity is critical for minimizing false negatives in retinal disease detection.
+
+Some possible next steps:
+* Utilize additional data augmentation techniques.
+* Experiment with other pretrained architectures, I only looked at two in this project.
+* Start fine tuning layers deeper in Xception to adapt to the the specific dataset better, and try other regularization techniques with this to prevent overfitting.
+* Tune hyperparameters such as learning rate and optimizers to help mitigate overfitting.
+* Explore other preprocessing techniques to highlight regions specific to fundus images.
+* Try combining multiple pretrained models.
+
+If production-level performance is able to be reached for the binary classification using further tuning and additional techniques, only then would I utilize transfer learning and build a multiclass model to predict the specific disease classes. 
