@@ -103,6 +103,8 @@ At this point I switched to transfer learning using pretrained models ResNet152V
 
 <img src='./images/best_model_performance.png' width='900'>
 <br>
+<img src='./images/confusion_matrix.png' width='500'>
+<br>
 
 This model doesn't reach my benchmark to make it production ready. I would need to tune at what level the pretrained level is trainable, and it starts overfitting as soon as it starts learning from the new data so I would need to introduce more regularization within the network. With the model for binary classification not reaching the level I needed for production I didn't pursue the multiclass problem. 
 
