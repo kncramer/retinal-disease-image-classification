@@ -29,7 +29,7 @@ There are several retinal diseases represented in this project:
 <center><img src='./images/746_right.jpg' width = '300'></center>
 <br>
 
-* ***Cataract*** - The lens inside the eye grows clowdy and opaque, usually with age, and the impact on vision is gradual. Can be treated with cataract surgery where the lens in taken out and replaced with a lens implant. Cataracts don't affect the retina directly, but they impede the view of the retina to detect other conditions.
+* ***Cataract*** - The lens inside the eye grows cloudy and opaque, usually with age, and the impact on vision is gradual. Can be treated with cataract surgery where the lens in taken out and replaced with a lens implant. Cataracts don't affect the retina directly, but they impede the view of the retina to detect other conditions.
 
 <center><img src='./images/112_right.jpg' width = '300'></center>
 <br>
@@ -44,12 +44,12 @@ There are several retinal diseases represented in this project:
 <center><img src='./images/28_right.jpg' width = '300'></center>
 <br>
 
-* ***Pathological Myopia*** - When a patient's vision is short sighted enough that the back of the eye experiences degenerative changes. While untreatable, these retinal changes mean the patient is at higher risk for events like retinal detachments and they may want more frequent retinal monitoring.
+* ***Pathological Myopia*** - When a patient's vision is nearsighted enough that the back of the eye experiences degenerative changes. While untreatable, these retinal changes mean the patient is at higher risk for events like retinal detachments and they may want more frequent retinal monitoring.
 
 <center><img src='./images/401_right.jpg' width = '300'></center>
 <br>
 
-The annual eye exam is the forefront way to screen for these conditions and many others. The historical method is for an optometrist or ophthalmologist to perform a dilated fundus exam where they dilate the pupil and physically look at the back of the eye. The increasingly preferred method is to take a photo of the retina with a fundus photography camera. They are not available in all practices, but if available they provide the doctor a more detailed look at the retina where they can focus and zoom on areas of interest and they can compare images year to year.
+The annual eye exam is the first and foremost way to screen for these conditions and many others. The historical method is for an optometrist or ophthalmologist to perform a dilated fundus exam where they dilate the pupil and physically look at the back of the eye. The increasingly preferred method is to take a photo of the retina with a fundus photography camera. They are not available in all practices, but if available they provide the doctor with a more detailed look at the retina where they can focus and zoom on areas of interest and they can compare images year to year.
 
 ---
 ## [Image Analysis](./code/01-eda.ipynb)
@@ -92,7 +92,7 @@ For most of the diseases, patients were split evenly on whether the condition af
 <br>
 
 ### Image Augmentation
-To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye non-discriminantly so this gave the models more data for each eye. In modeling I used two random augmentation methods, rotation to account for slight variations in orientation with images taken and contrast to try and highlight conditions that show up as dark or bright spots.
+To increase the size of the image dataset I investigated several options to transform and augment the data. I considered converting the images to grayscale to try and mimic the autofluorescence settting on some fundus photography machines that highlights different conditions. This didn't have the affect I was looking for so I didn't end up using these photos to train any models. I also cropped images around the optic nerve and macula for the images. I didn't use these for training either, if I continue on to transfer learning for the multiclass problem I might bring them in since some conditions are focused around those areas but since not all images are centered the coordinates for cropping don't include the area of interest for every image. I did end up including all images flipped horizontally because any condition can affect either eye indiscriminately so this gave the models more data for each eye. In modeling I used two random augmentation methods, rotation to account for slight variations in orientation with images taken and contrast to try and highlight conditions that show up as dark or bright spots.
 
 ---
 ## [Modeling](./code/02_modeling.ipynb)
